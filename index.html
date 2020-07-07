@@ -1,6 +1,9 @@
+<!doctype html>
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
@@ -14,106 +17,98 @@
 </head>
 
 <body>
-    <!--Termizu Madal-->
-    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold text-muted">Termizu</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body mx-3">
-                    <div class="mb-5">
-                        <input id="login_form_command" class="form-control validate" placeholder="Command" />
-                        <div class="invalid-feedback">What did you mean?</div>
-                    </div>
-
-                    <div class="mb-4">
-                        <input id="login_form_argv" class="form-control validate" placeholder="Argument" />
-                    </div>
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-lg btn-primary btn-block" id="login_btn">Submit</button>
+    <div id="sleepSCN" class="bg-secondary w-100 h-100 " style="display: none;z-index: 9999;"></div>
+    <div id="Booting" class="bg-secondary container-fluid d-flex w-100 h-100 ">
+        <div class="align-self-center w-100">
+            <div class="row justify-content-center">
+                <h3>歡迎</h3>
+            </div>
+            <div class="row justify-content-center">
+                <div class=" progress w-25">
+                    <div id="bootP" class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
                 </div>
             </div>
         </div>
     </div>
-    <!--Cover-->
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column text-center">
-        <header class="masthead mb-auto">
-            <div class="inner">
-                <a href="/index.html">
-                    <h3 class="masthead-brand">Mizuyoru TW</h3>
-                </a>
-                <div id="LoadingPage" class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
+    <div id="termizu-card" class="card w-25">
+        <div class="card-header white-text">
+            <div class="row">
+                <div class="col">
+                    Termizu
                 </div>
-                <nav class="nav nav-masthead justify-content-center">
-                    <a class="nav-link active" href="/index.html">Home</a>
-                    <a class="nav-link" href="https://github.com/MizuyoruTW" target="_blank">Github</a>
-                    <a class="nav-link" href="#">Twitter</a>
-                </nav>
-            </div>
-        </header>
-
-        <main role="main" class="inner cover toggler" style="display:none;">
-            <h1 class="cover-heading">Mizuyoru TW</h1>
-            <p class="lead">新人魔法師一個，喜歡看動漫、玩遊戲和寫程式</p>
-            <p class="lead ui-widget-content ui-corner-all">
-                <a id="doMagic" href="#" class="btn btn-lg btn-secondary">施展魔法</a>
-            </p>
-
-            <div id="FakeNews" class="alert alert-primary p-0 text-left" role="alert">
-                <div>
-                    <div class="p-2">你知道嗎，按一下這裡或<kbd>Ctrl</kbd>可以叫出特製的終端機Termizu!</div>
-                    <div class="p-2">慟! 網站管理員是蘿莉控!</div>
-                    <div class="p-2">什麼? 網站是用JQuery和Bootstrap做的?</div>
+                <div class="col">
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
-        </main>
-
-        <footer class="mastfoot mt-auto">
-            <div class="inner">
-                <p> 這裡能擺一些東西</p>
+        </div>
+        <div class="card-body">
+            <div class="mb-5">
+                <input id="login_form_command" class="form-control validate" placeholder="Command" />
+                <div class="invalid-feedback">What did you mean?</div>
             </div>
-        </footer>
+
+            <div class="mb-4">
+                <input id="login_form_argv" class="form-control validate" placeholder="Argument" />
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" id="login_btn">Submit</button>
+        </div>
     </div>
+
+
+    <div id="about-card" class="card w-50 h-75">
+        <div class="card-header white-text">
+            <div class="row">
+                <div class="col">
+                    YouTube 播放器
+                </div>
+                <div class="col">
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <input id="youtube_id" class="form-control" placeholder="YouTube ID" />
+            <iframe id="YTembed" style="width:100%;height:80%;" src=""></iframe>
+
+        </div>
+
+    </div>
+
     <!--Toolbar-->
-    <nav class="navbar fixed-bottom navbar-expand-sm navbar-primary bg-primary">
+    <nav class="navbar fixed-bottom navbar-expand-sm navbar-primary p-0">
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropup">
-                    <a class="nav-link dropdown-toggle" href="https://getbootstrap.com/" id="dropdown10"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Start</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Start</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown10">
                         <a class="dropdown-item" id="termizu" href="#">Termizu</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" id="shutdown" href="#">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
-                                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
-                            </svg>
-                            <span>Shutdown</span>
+                        <a class="dropdown-item" id="YT" href="#">YouTube播放器</a>
+                        <a class="dropdown-item" id="sleep" href="#">
+                            <img src="/assets/power.svg">
+                            <span>Sleep</span>
                         </a>
                     </div>
                 </li>
-                <li class="nav-item pt-1 ml-3">
+                <li class="nav-item pt-1 mx-1 text-center">
                     <a id="search" href="#">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-                            <path fill-rule="evenodd"
-                                d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                        </svg>
+                        <img src="/assets/search.svg">
+                    </a>
+                </li>
+
+                <li class="nav-item pt-1 mx-1 text-center">
+                    <a href="https://github.com/MizuyoruTW" target="_blank">
+                        <img width="32px" src=" /assets/GitHub-Mark-64px.png">
                     </a>
                 </li>
             </ul>
+            <span class="navbar-text mr-2" id="NowTime">
+                00:00:00
+            </span>
         </div>
     </nav>
     <script src="main.js"></script>

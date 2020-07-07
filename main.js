@@ -1,38 +1,76 @@
 var num = 0;
-const commands = ["RAS", "ECHO", "ASSIGN", "PIXIV", "SYSTEM"];
+const commands = ["RAS", "ECHO", "PIXIV", "SYSTEM"];
+function focus_card(jname) {
+    $(".card").not(jname).css("z-index", "auto");
+    $(jname).css("z-index", "999");
+    $(jname).children('.card-header').addClass("bg-primary");
+    $(".card").not(jname).children('.card-header').removeClass("bg-primary");
+}
 $(document).ready(function () {
-    $('#LoadingPage').remove();
-    $('main').fadeIn(1500);
-    $('#FakeNews').easyTicker({
-        direction: 'up',
-        easing: 'swing',
-        speed: 'slow',
-        interval: 3000,
-        height: 'auto',
-        visible: 1,
-        mousePause: true,
-        controls: {
-            up: '',
-            down: '',
-            toggle: '',
-            playText: 'Play',
-            stopText: 'Stop'
-        },
-        callbacks: {
-            before: false,
-            after: false
+    $('.card').css("position", "fixed");
+    $('.card').hide();
+    var n = 0;
+    var boot_count = setInterval(function () {
+        n += Math.floor(Math.random() * 20);
+        if (n > 100) n = 100;
+        $('#bootP').css("width", n.toString() + "%");
+        $('#bootP').html(n.toString() + "%");
+        if (n == 100) {
+            $('#Booting').fadeOut("slow", function () {
+                $('#Booting').remove();
+                clearInterval(boot_count);
+            });
         }
-    });
+    }, 500);
+
+    setInterval(function () {
+        var time = new Date();
+        $('#NowTime').html(((time.getHours() < 10) ? "0" : "") + time.getHours() + ":" + ((time.getMinutes() < 10) ? "0" : "") + time.getMinutes() + ":" + ((time.getSeconds() < 10) ? "0" : "") + time.getSeconds());
+    }, 500);
 });
-$("#FakeNews, #termizu, #search").click(function () {
-    $("#modalLoginForm").modal("show");
+$(".card").draggable({
+    containment: "parent",
+    start: function () {
+        focus_card(this);
+    }
 });
 
-$("#shutdown").click(function () {
-    alert("自己關掉")
+$(".card").click(
+    function () {
+        focus_card(this);
+    }
+);
+
+$('.close').click(function () {
+    $(".card").not(this).css("position", "absolute");
+    $(this).parent().parent().parent().parent().hide();
+});
+$("#termizu, #search").click(function () {
+    $("#termizu-card").show();
+    focus_card("#termizu-card");
 });
 
-$('#modalLoginForm').on('shown.bs.modal', function () {
+$("#YT").click(function () {
+    $("#about-card").show();
+    focus_card("#about-card");
+});
+
+$("#sleep").click(function () {
+    $('#sleepSCN').fadeIn("slow");
+});
+
+$("#sleepSCN").click(function () {
+    $('#sleepSCN').fadeOut("slow");
+});
+
+$("#youtube_id").keypress(function (e) {
+    code = (e.keyCode ? e.keyCode : e.which);
+    if (code == 13) {
+        $('#YTembed').attr("src", "https://www.youtube.com/embed/" + $("#youtube_id").val() + "?autoplay=1&playlist=" + $("#youtube_id").val());
+    }
+});
+
+$('#termizu').on('shown.bs.modal', function () {
     $('#login_form_command').focus();
 })
 $("#login_btn").click(function () {
@@ -71,15 +109,11 @@ function summit_command() {
         case 1://echo
             alert($('#login_form_argv').val());
             break
-        case 2://assign
-            num = parseFloat($('#login_form_argv').val());
-            $('#stdout').html(num);
-            break;
-        case 3://pixiv
+        case 2://pixiv
             url = "https://www.pixiv.net/artworks/" + $('#login_form_argv').val();
             window.open(url);
             break;
-        case 4://system
+        case 3://system
             window.open("/system.html", "_self");
             break;
         default:
