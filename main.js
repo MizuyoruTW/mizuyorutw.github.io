@@ -1,33 +1,55 @@
 var num = 0;
 const commands = ["RAS", "ECHO", "PIXIV", "SYSTEM"];
+
 function focus_card(jname) {
     $(".card").not(jname).css("z-index", "auto");
     $(jname).css("z-index", "999");
     $(jname).children('.card-header').addClass("bg-primary");
     $(".card").not(jname).children('.card-header').removeClass("bg-primary");
 }
+
 $(document).ready(function () {
     $('.card').css("position", "fixed");
     $('.card').hide();
-    var n = 0;
-    var boot_count = setInterval(function () {
-        n += Math.floor(Math.random() * 20);
-        if (n > 100) n = 100;
-        $('#bootP').css("width", n.toString() + "%");
-        $('#bootP').html(n.toString() + "%");
-        if (n == 100) {
-            $('#Booting').fadeOut("slow", function () {
-                $('#Booting').remove();
-                clearInterval(boot_count);
-            });
-        }
-    }, 500);
-
+    //boot
+    $.get("https://api.github.com/search/users?q=MizuyoruTW", function (result) {
+        $("#profile_img").attr("src", result["items"][0]["avatar_url"]);
+        changeText($("#bootingMSG"), "連線成功，下載資料中");
+        $("#profile_img").on("load", function () {
+            $("#profile_img, #bootPP").fadeIn();
+            changeText($("#bootingMSG"), "下載完成，載入中...");;
+            var n = 0;
+            var boot_count = setInterval(function () {
+                n += Math.floor(Math.random() * 20);
+                if (n > 100) n = 100;
+                $('#bootP').css("width", n.toString() + "%");
+                $('#bootP').html(n.toString() + "%");
+                if (n == 100) {
+                    clearInterval(boot_count);
+                    changeText($("#bootingMSG"), "歡迎");
+                    setTimeout(function () {
+                        $('#Booting').fadeOut("slow", function () {
+                            $('#Booting').remove();
+                        });
+                    }, 2000);
+                }
+            }, 500);
+        });
+    });
+    //get current time
     setInterval(function () {
         var time = new Date();
         $('#NowTime').html(((time.getHours() < 10) ? "0" : "") + time.getHours() + ":" + ((time.getMinutes() < 10) ? "0" : "") + time.getMinutes() + ":" + ((time.getSeconds() < 10) ? "0" : "") + time.getSeconds());
     }, 500);
 });
+
+//change text with fade animation
+function changeText(target, text) {
+    target.fadeOut(200, function () {
+        $(this).html(text).fadeIn(200);
+    });
+}
+
 $(".card").draggable({
     containment: "parent",
     start: function () {
@@ -43,15 +65,17 @@ $(".card").click(
 
 $('.close').click(function () {
     $(".card").not(this).css("position", "absolute");
-    $(this).parent().parent().parent().parent().hide();
+    $(this).parent().parent().parent().parent().fadeOut(100);
 });
+
 $("#termizu, #search").click(function () {
-    $("#termizu-card").show();
+    $("#termizu-card").fadeIn(100);
+    $('#login_form_command').focus();
     focus_card("#termizu-card");
 });
 
 $("#YT").click(function () {
-    $("#about-card").show();
+    $("#about-card").fadeIn(100);
     focus_card("#about-card");
 });
 
@@ -75,35 +99,24 @@ $("#youtube_id").keypress(function (e) {
     }
 });
 
-$('#termizu').on('shown.bs.modal', function () {
-    $('#login_form_command').focus();
-})
 $("#login_btn").click(function () {
     summit_command();
 });
+
 $("#login_form_command").keypress(function (e) {
     code = (e.keyCode ? e.keyCode : e.which);
     if (code == 13) {
         $('#login_form_argv').focus();
     }
 });
+
 $("#login_form_argv").keypress(function (e) {
     code = (e.keyCode ? e.keyCode : e.which);
     if (code == 13) {
         summit_command();
     }
 });
-$("#doMagic").click(function () {
-    $("#doMagic").toggle("explode", {}, 1500, function () {
-        $("#doMagic").html("騙你的")
-        $("#doMagic").fadeIn();
-    });
-});
-$(document).keydown(function (e) {
-    if (e.ctrlKey) {
-        $("#modalLoginForm").modal("show");
-    }
-});
+
 function summit_command() {
     $('#login_form_command').removeClass("is-invalid");
     var index = commands.indexOf($("#login_form_command").val().toUpperCase());

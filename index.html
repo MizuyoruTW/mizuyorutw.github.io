@@ -21,10 +21,13 @@
     <div id="Booting" class="bg-secondary container-fluid d-flex w-100 h-100 ">
         <div class="align-self-center w-100">
             <div class="row justify-content-center">
-                <h3>歡迎</h3>
+                <img id="profile_img" class="rounded-circle" src="" width="200px" height="200px" style="display:none;">
             </div>
             <div class="row justify-content-center">
-                <div class=" progress w-25">
+                <h3 id="bootingMSG">連線中...</h3>
+            </div>
+            <div class="row justify-content-center">
+                <div id="bootPP" class=" progress w-25" style="display:none;">
                     <div id="bootP" class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
                 </div>
             </div>
@@ -56,7 +59,6 @@
         </div>
     </div>
 
-
     <div id="about-card" class="card w-50 h-75">
         <div class="card-header white-text">
             <div class="row">
@@ -72,8 +74,8 @@
         </div>
         <div class="card-body">
             <input id="youtube_id" class="form-control" placeholder="YouTube ID" />
-            <iframe id="YTembed" style="width:100%;height:80%;" src=""></iframe>
-
+            <iframe id="YTembed" style="width:100%;height:95%;" src="" allowFullScreen="allowFullScreen"
+                frameBorder="0"></iframe>
         </div>
 
     </div>
@@ -81,8 +83,8 @@
     <!--Toolbar-->
     <nav class="navbar fixed-bottom navbar-expand-sm navbar-primary p-0">
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropup">
+            <div class="navbar-nav mr-auto">
+                <div class="nav-item dropup">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Start</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown10">
@@ -93,25 +95,19 @@
                             <span>Sleep</span>
                         </a>
                     </div>
-                </li>
-                <li class="nav-item pt-1 mx-1 text-center">
-                    <a id="search" href="#">
-                        <img src="./assets/search.svg">
-                    </a>
-                </li>
+                </div>
+                <a id="search" href="#" class="nav-item pt-1 mx-1 text-center">
+                    <img src="./assets/search.svg">
+                </a>
 
-                <li class="nav-item pt-1 mx-1 text-center">
-                    <a href="https://github.com/MizuyoruTW" target="_blank">
-                        <img width="32px" src="./assets/GitHub-Mark-64px.png">
-                    </a>
-                </li>
+                <a href="https://github.com/MizuyoruTW" target="_blank" class="nav-item pt-1 mx-1 text-center">
+                    <img width="32px" src="./assets/GitHub-Mark-64px.png">
+                </a>
 
-                <li class="nav-item pt-1 mx-1 text-center">
-                    <a href="https://twitter.com/mizuyoru_TW" target="_blank">
-                        <img width="32px" src="./assets/Twitter_Social_Icon_Circle_Color.svg">
-                    </a>
-                </li>
-            </ul>
+                <a href="https://twitter.com/mizuyoru_TW" target="_blank" class="nav-item pt-1 mx-1 text-center">
+                    <img width="32px" src="./assets/Twitter_Social_Icon_Circle_Color.svg">
+                </a>
+            </div>
             <span class="navbar-text mr-2" id="NowTime">
                 00:00:00
             </span>
