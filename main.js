@@ -66,7 +66,12 @@ $("#sleepSCN").click(function () {
 $("#youtube_id").keypress(function (e) {
     code = (e.keyCode ? e.keyCode : e.which);
     if (code == 13) {
-        $('#YTembed').attr("src", "https://www.youtube.com/embed/" + $("#youtube_id").val() + "?autoplay=1&playlist=" + $("#youtube_id").val());
+        var text = $("#youtube_id").val();
+        if (text.includes('youtube')) {
+            text = text.replace("https://www.youtube.com/watch?v=", "");
+        }
+        $('#YTembed').attr("src", "https://www.youtube.com/embed/" + text + "?autoplay=1&loop=1&playlist=" + text);
+
     }
 });
 
