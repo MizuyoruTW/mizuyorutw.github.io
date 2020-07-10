@@ -68,7 +68,7 @@ $('.close').click(function () {
     $(this).parent().parent().parent().parent().fadeOut(100);
 });
 
-$("#termizu, #search").click(function () {
+$("#termizu").click(function () {
     $("#termizu-card").fadeIn(100);
     $('#login_form_command').focus();
     focus_card("#termizu-card");
