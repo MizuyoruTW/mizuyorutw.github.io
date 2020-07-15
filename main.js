@@ -9,6 +9,7 @@ function focus_card(jname) {
 }
 
 $(document).ready(function () {
+    loadlive2d("live2d", "./assets/live2d_model/model.json");
     $('.card').css("position", "fixed");
     $('.card').hide();
     //boot
@@ -75,8 +76,13 @@ $("#termizu").click(function () {
 });
 
 $("#YT").click(function () {
-    $("#about-card").fadeIn(100);
-    focus_card("#about-card");
+    $("#YTP-card").fadeIn(100);
+    focus_card("#YTP-card");
+});
+
+$("#Settings").click(function () {
+    $("#setting-card").fadeIn(100);
+    focus_card("#setting-card");
 });
 
 $("#sleep").click(function () {
