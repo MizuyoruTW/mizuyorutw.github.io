@@ -16,6 +16,21 @@
 </head>
 
 <body>
+    <div id="toast_area" style="position: fixed; top:0; right:0; width: 20%; opacity: 65%;"></div>
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="..." class="rounded mr-2" alt="...">
+            <strong class="mr-auto">Bootstrap</strong>
+            <small class="text-muted">just now</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            See? Just like this.
+        </div>
+    </div>
+
     <!--Sleep cover-->
     <div id="sleepSCN" class="bg-secondary w-100 h-100 " style="display: none;z-index: 9999;"></div>
     <!--Boot cover-->
@@ -102,8 +117,8 @@
                         role="tab" aria-controls="v-pills-about" aria-selected="true">關於</a>
                     <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
                         aria-controls="v-pills-profile" aria-selected="false">還不知道放什麼</a>
-                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
-                        aria-controls="v-pills-messages" aria-selected="false">網路狀態</a>
+                    <a class="nav-link" id="v-pills-network-tab" data-toggle="pill" href="#v-pills-network" role="tab"
+                        aria-controls="v-pills-network" aria-selected="false">網路狀態</a>
                     <a class="nav-link" id="v-pills-reference-tab" data-toggle="pill" href="#v-pills-reference"
                         role="tab" aria-controls="v-pills-reference" aria-selected="false">致謝</a>
                 </div>
@@ -111,7 +126,7 @@
                     <div class="container-fluid tab-pane fade show active" id="v-pills-about" role="tabpanel"
                         aria-labelledby="v-pills-about-tab">
                         <div class="row w-50 mx-auto">
-                            <img src="./assets/logo.png" class="rounded-circle border border-dark">
+                            <img src="./assets/logo.png" class="w-100 rounded-circle border border-dark">
                         </div>
                         <div class="row">
                             這裡是介紹
@@ -120,9 +135,35 @@
                     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                         aria-labelledby="v-pills-profile-tab">
                         ...</div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                        aria-labelledby="v-pills-messages-tab">
-                        ...</div>
+                    <!--Network-->
+                    <div class="tab-pane fade" id="v-pills-network" role="tabpanel"
+                        aria-labelledby="v-pills-network-tab">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="./assets/computer.svg" class="w-100">
+                            </div>
+                            <div class="col-6 p-0" style="display: flex; align-items: center;">
+                                <div class="progress w-100">
+                                    <div id="conn_bar"
+                                        class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                        role="progressbar" style="width:100%">
+                                        Connected
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <img src="./assets/server.svg" class="w-100">
+                            </div>
+                        </div>
+                        <h4 class="row" id="conn_msg">已連線至遠端伺服器</h4>
+                        <div class="row">
+                            <ul>
+                                <li>已傳送 <span id="conn_send">0</span> Bytes</li>
+                                <li>已接收 <span id="conn_recv">0</span> Bytes</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--Reference-->
                     <div class="tab-pane fade" id="v-pills-reference" role="tabpanel"
                         aria-labelledby="v-pills-reference-tab">
                         <ul>

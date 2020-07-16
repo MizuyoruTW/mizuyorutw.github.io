@@ -42,7 +42,48 @@ $(document).ready(function () {
         var time = new Date();
         $('#NowTime').html(((time.getHours() < 10) ? "0" : "") + time.getHours() + ":" + ((time.getMinutes() < 10) ? "0" : "") + time.getMinutes() + ":" + ((time.getSeconds() < 10) ? "0" : "") + time.getSeconds());
     }, 500);
+
+    //check connection
+    setInterval(function () {
+        $.ajax({
+            url: "./connection.json",
+            dataType: 'json',
+            error: function () {
+                if (!$('#conn_err').length) {
+                    var toaststr = '<div id="conn_err" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">\
+                                    <div class="toast-header bg-primary">\
+                                        <strong class="mr-auto text-white">Connection Error</strong>\
+                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">\
+                                        <span aria-hidden="true">&times;</span>\
+                                        </button>\
+                                    </div>\
+                                    <div class="toast-body text-muted bg-white">\
+                                        連線至伺服器錯誤\
+                                    </div>\
+                                </div>';
+                    $('#toast_area').append(toaststr);
+                }
+                $('#conn_err').toast('show');
+                $('#conn_bar').removeClass("progress-bar-animated");
+                $('#conn_bar').removeClass("bg-success");
+                $('#conn_bar').addClass("bg-danger");
+                $('#conn_bar').html("Disconnected");
+                $('#conn_msg').html("連線至遠端伺服器失敗");
+            },
+            success: function () {
+                $('#conn_bar').addClass("progress-bar-animated");
+                $('#conn_bar').addClass("bg-success");
+                $('#conn_bar').removeClass("bg-danger");
+                $('#conn_bar').html("Connected");
+                $('#conn_msg').html("已連線至遠端伺服器");
+                $('#conn_send').html((parseInt($('#conn_send').html()) + Math.floor(Math.random() * 10240)).toString());
+                $('#conn_recv').html((parseInt($('#conn_recv').html()) + Math.floor(Math.random() * 10240)).toString());
+            },
+            timeout: 3000
+        });
+    }, 5000);
 });
+
 
 //change text with fade animation
 function changeText(target, text) {
