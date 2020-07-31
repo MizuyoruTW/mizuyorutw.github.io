@@ -1,7 +1,3 @@
-# This website is unfinished, the author is working on it now.
-
-## note
-* wallpaper(./assets/bg.jpg) 
-	* This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license.
-	* URL: https://commons.wikimedia.org/wiki/File:43228_1_miscellaneous_digital_art_simple_simple_patterns.jpg
-	* Author: Yunari11
+# Welcome
+這個網站是用Jquery和Bootstrap做成，詳細請進入網頁選單的系統查看
+mobile版則是用Mashup的模板做成
