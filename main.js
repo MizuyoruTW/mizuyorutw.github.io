@@ -51,7 +51,7 @@ $(document).ready(function () {
     //check connection
     setInterval(function () {
         $.ajax({
-            url: "./connection.json" + Date.now().toString(),
+            url: "./connection.json?time=" + Date.now().toString(),
             dataType: 'json',
             error: function () {
                 if (!$('#conn_err').length) {
