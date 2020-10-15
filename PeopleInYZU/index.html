@@ -111,7 +111,6 @@
       $('.map').css("margin", "0 auto");
     })
     $('area').click(function () {
-      var count = 0;
       if ($(this).attr("href") == "#turtle") {
         $('#detail-title').html("你發現了gura和あくあ了");
         $('#detail-body').html("<img src='https://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_3000,w_2000,f_auto,q_auto/1369026/251247_457554.jpg'></img><img src='https://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_3000,w_2000,f_auto,q_auto/1369026/309110_49678.png'></img>");
@@ -122,23 +121,23 @@
           url: "./count.json",
           dataType: "json",
           success: function (results) {
-            count = results[title];
+            var count = results[title];
             $('#detail-body').html("目前人數: " + count.toString() + " 人");
+            $('#detail-body').removeClass("text-success");
+            $('#detail-body').removeClass("text-primary");
+            $('#detail-body').removeClass("text-warning");
+            $('#detail-body').removeClass("text-danger");
+            if (count > 500) {
+              $('#detail-body').addClass("text-danger");
+            } else if (count > 300) {
+              $('#detail-body').addClass("text-warning");
+            } else if (count > 100) {
+              $('#detail-body').addClass("text-primary");
+            } else {
+              $('#detail-body').addClass("text-success");
+            }
           }
         });
-      }
-      $('#detail-body').removeClass("text-success");
-      $('#detail-body').removeClass("text-primary");
-      $('#detail-body').removeClass("text-warning");
-      $('#detail-body').removeClass("text-danger");
-      if (count > 500) {
-        $('#detail-body').addClass("text-danger");
-      } else if (count > 300) {
-        $('#detail-body').addClass("text-warning");
-      } else if (count > 100) {
-        $('#detail-body').addClass("text-primary");
-      } else {
-        $('#detail-body').addClass("text-success");
       }
       $("#details").modal("show");
     });

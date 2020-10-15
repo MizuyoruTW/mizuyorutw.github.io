@@ -6,3 +6,7 @@ html,body{
 *{
     max-width: 100%;
 }
+
+#detail-body{
+    -webkit-text-stroke: 0.1px black;
+}
