@@ -99,7 +99,7 @@
           previousWidth = document.body.clientWidth;
           return true;
         };
-        window.onresize = this.resize;
+        //window.onresize = this.resize;
       },
         imageMap = new ImageMap(document.getElementById("imagemap"));
       imageMap.resize();
@@ -110,6 +110,16 @@
       $('.map').css("background-repeat", "no-repeat");
       $('.map').css("margin", "0 auto");
     })
+    $(document).ready(function () {
+      var resize_count = 1;
+      $(window).resize(function () {
+        resize_count++;
+        if (resize_count > 1) {
+          history.go(0);
+        }
+      });
+    })
+
     $('area').click(function () {
       if ($(this).attr("href") == "#turtle") {
         $('#detail-title').html("你發現了gura和あくあ了");
