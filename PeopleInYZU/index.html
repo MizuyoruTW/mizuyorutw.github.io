@@ -114,9 +114,9 @@
       $(window).resize(function () {
         resize_count++;
         if (resize_count > 1) {
-	 setTimeout(function(){
-	  window.location.reload();
-	 });
+          setTimeout(function () {
+            window.location.reload();
+          });
         }
       });
     })
@@ -131,9 +131,9 @@
         jQuery.ajax({
           url: "./count.json",
           dataType: "json",
-          done: function (results) {
-            var count=-1;
-	    count = results[title];
+          success: function (results) {
+            var count = -1;
+            count = results[title];
             $('#detail-body').html("目前人數: " + count.toString() + " 人");
             $('#detail-body').removeClass("text-success");
             $('#detail-body').removeClass("text-primary");
@@ -149,11 +149,11 @@
               $('#detail-body').addClass("text-success");
             }
           },
-	  fail: function(){
-	   $('detail-title').html("Oops!");
-	   $('detail-body').html('Look like the data was missing.');
-	   $('detail-body').addClass("text-danger");
-	  }
+          error: function () {
+            $('detail-title').html("Oops!");
+            $('detail-body').html('Look like the data was missing.');
+            $('detail-body').addClass("text-danger");
+          }
         });
       }
       $("#details").modal("show");
