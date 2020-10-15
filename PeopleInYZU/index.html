@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<head>
+  <title></title>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./main.css">
+  <script src="./jquery.maphilight.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">元智人員分布圖</a>
+      </li>
+    </ul>
+  </nav>
+  <div>
+    <img id="mapimage" src="./assets/map.png" usemap="#imagemap" class="map">
+
+    <map id="imagemap" name="imagemap">
+      <area shape="poly" title="活動中心" href="#"
+        coords="3081, 777, 3165, 777, 3166, 765, 3204, 768, 3204, 776, 3266, 780, 3276, 779, 3276, 769, 3261, 765, 3267, 752, 3300, 753, 3298, 766, 3287, 773, 3287, 779, 3308, 778, 3311, 769, 3346, 769, 3373, 793, 3365, 804, 3443, 880, 3443, 889, 3451, 888, 3455, 875, 3462, 876, 3473, 885, 3471, 915, 3460, 919, 3448, 905, 3444, 906, 3444, 1036, 3437, 1036, 3439, 1091, 3362, 1090, 3362, 1074, 3341, 1075, 3337, 1093, 3291, 1088, 3289, 1075, 3269, 1080, 3273, 1093, 3171, 1091, 3114, 1057, 3085, 997, 3083, 908, 3099, 908, 3100, 861, 3090, 859, 3089, 808, 3077, 801" />
+      <area shape="poly" title="游泳池" href="#" coords="3122, 438, 3344, 662, 3342, 745, 3060, 746, 3119, 656" />
+      <area shape="poly" title="體育館" href="#"
+        coords="3068, 1088, 3299, 1238, 3325, 1267, 3329, 1316, 3312, 1353, 3270, 1377, 3221, 1376, 2982, 1222, 2957, 1181, 2963, 1128, 2998, 1097, 3042, 1085" />
+      <area shape="poly" title="七館" href="#"
+        coords="1772, 1298, 1773, 1420, 1810, 1421, 1811, 1454, 1793, 1456, 1794, 1498, 1811, 1498, 1812, 1652, 2050, 1652, 2026, 1492, 2026, 1477, 2067, 1473, 2086, 1329, 2086, 1297, 1968, 1296, 1966, 1340, 1889, 1339, 1888, 1344, 1875, 1344, 1873, 1321, 1874, 1299" />
+      <area shape="poly" title="三館" href="#" coords="1517, 1318, 1717, 1317, 1716, 1617, 1517, 1618" />
+      <area shape="poly" title="二館" href="#"
+        coords="1575, 602, 1671, 604, 1762, 695, 1743, 714, 1751, 724, 1750, 850, 1744, 860, 1761, 881, 1668, 976, 1572, 975, 1484, 883, 1507, 858, 1495, 852, 1496, 832, 1489, 831, 1489, 743, 1496, 744, 1496, 724, 1504, 714, 1481, 693" />
+      <area shape="poly" title="五館" href="#"
+        coords="1157, 607, 1391, 610, 1393, 835, 1216, 836, 1216, 910, 978, 910, 977, 772, 965, 772, 964, 741, 978, 741, 980, 636, 1158, 636" />
+      <area shape="poly" title="六館" href="#"
+        coords="800, 730, 888, 728, 889, 738, 902, 735, 902, 798, 887, 798, 886, 806, 853, 807, 853, 1076, 887, 1104, 898, 1147, 890, 1147, 880, 1186, 853, 1208, 852, 1254, 798, 1253, 795, 1206, 767, 1184, 757, 1151, 762, 992, 777, 993, 779, 963, 767, 962, 770, 956, 764, 951, 763, 937, 744, 933, 748, 912, 752, 888, 748, 885, 745, 863, 752, 863, 752, 842, 746, 841, 746, 818, 755, 819, 753, 802, 760, 803, 761, 765, 803, 767" />
+      <area shape="poly" title="一館" href="#"
+        coords="910, 1318, 1022, 1320, 1036, 1336, 1037, 1384, 1034, 1624, 1034, 1687, 1032, 1753, 912, 1752, 911, 1672, 888, 1671, 886, 1637, 911, 1635, 910, 1322" />
+    </map>
+  </div>
+  <div class="modal fade" id="details">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" id="detail-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" id="detail-body">
+          目前人數: 0 人
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+      //resize image map
+      var x = 0;
+      $('[data-toggle="tooltip"]').tooltip()
+      var ImageMap = function (map) {
+        var n,
+          areas = map.getElementsByTagName('area'),
+          len = areas.length,
+          coords = [],
+          previousWidth = 3840;
+        for (n = 0; n < len; n++) {
+          coords[n] = areas[n].coords.split(',');
+        }
+        this.resize = function () {
+          var n, m, clen;
+
+          x = document.body.clientWidth / previousWidth / 2;
+          for (n = 0; n < len; n++) {
+            clen = coords[n].length;
+            for (m = 0; m < clen; m++) {
+              coords[n][m] *= x;
+            }
+            areas[n].coords = coords[n].join(',');
+          }
+          previousWidth = document.body.clientWidth;
+          return true;
+        };
+        window.onresize = this.resize;
+      },
+        imageMap = new ImageMap(document.getElementById("imagemap"));
+      imageMap.resize();
+      $('.map').maphilight({ fade: false });
+      $('.map').css("width", (3840 * x).toString());
+      $('.map').css("height", (3459 * x).toString());
+      $('.map').css("background-size", "100% 100%");
+      $('.map').css("background-repeat", "no-repeat");
+      $('.map').css("margin", "0 auto");
+    })
+    $('area').click(function () {
+      var title = $(this).attr('title');
+      $('#detail-title').html(title);
+      jQuery.ajax({
+        url: "./count.json",
+        dataType: "json",
+        success: function (results) {
+          var count = results[title];
+          $('#detail-body').html("目前人數: " + count.toString() + " 人");
+          $('#detail-body').removeClass("text-success");
+          $('#detail-body').removeClass("text-primary");
+          $('#detail-body').removeClass("text-warning");
+          $('#detail-body').removeClass("text-danger");
+          if (count > 500) {
+            $('#detail-body').addClass("text-danger");
+          } else if (count > 300) {
+            $('#detail-body').addClass("text-warning");
+          } else if (count > 100) {
+            $('#detail-body').addClass("text-primary");
+          } else {
+            $('#detail-body').addClass("text-success");
+          }
+        }
+      });
+      $("#details").modal("show");
+    });
+  </script>
+</body>
