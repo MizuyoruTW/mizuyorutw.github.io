@@ -26,6 +26,26 @@
 </head>
 
 <body>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <div tabindex="0" href="https://github.com/MizuyoruTW" target="_blank"
+                        ondblclick="open_desktop(this);" class=" text-center desktop">
+                        <img width="50px" src="./assets/github.png">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div tabindex="1" href="https://twitter.com/mizuyoru_TW" ondblclick="open_desktop(this);"
+                        class="text-center desktop">
+                        <img width="50px" src="./assets/Twitter_Social_Icon_Circle_Color.svg">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <div id="toast_area" style="position: fixed; top:0; right:0; width: 20%; opacity: 65%;"></div>
     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
@@ -40,7 +60,7 @@
             See? Just like this.
         </div>
     </div>
-
+    <div id="tty" class="bg-dark w-100 h-100 " style="display: none;z-index: 10000;position: fixed;"></div>
     <!--Sleep cover-->
     <div id="sleepSCN" class="bg-secondary w-100 h-100 " style="display: none;z-index: 9999;position: fixed;"></div>
     <!--Boot cover-->
@@ -125,8 +145,6 @@
                     aria-orientation="vertical">
                     <a class="nav-link active" id="v-pills-about-tab" data-toggle="pill" href="#v-pills-about"
                         role="tab" aria-controls="v-pills-about" aria-selected="true">關於</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-                        aria-controls="v-pills-profile" aria-selected="false">還不知道放什麼</a>
                     <a class="nav-link" id="v-pills-network-tab" data-toggle="pill" href="#v-pills-network" role="tab"
                         aria-controls="v-pills-network" aria-selected="false">網路狀態</a>
                     <a class="nav-link" id="v-pills-reference-tab" data-toggle="pill" href="#v-pills-reference"
@@ -135,16 +153,19 @@
                 <div class="tab-content col text-muted h-100 overflow-auto" id="v-pills-tabContent">
                     <div class="container-fluid tab-pane fade show active" id="v-pills-about" role="tabpanel"
                         aria-labelledby="v-pills-about-tab">
-                        <div class="row w-50 mx-auto">
-                            <img src="./assets/logo.png" class="w-100 rounded-circle border border-dark">
-                        </div>
-                        <div class="row">
-                            這裡是介紹
+                        <div id="sys-info" class="row">
+                            系統：Mizuyoru System
+                            <br />
+                            架構：128 bits
+                            <br />
+                            CPU：Imdel i10-8877K up to 5 THz
+                            <br />
+                            RAM：64 TB(63.5 TB 可用)
+                            <br />
+                            GPU：Nvitia RTW 6969
+                            <br />
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-                        aria-labelledby="v-pills-profile-tab">
-                        ...</div>
                     <!--Network-->
                     <div class="tab-pane fade" id="v-pills-network" role="tabpanel"
                         aria-labelledby="v-pills-network-tab">
@@ -337,14 +358,6 @@
                             placeholder="Google Search" autocomplete="off">
                     </div>
                 </form>
-
-                <a href="https://github.com/MizuyoruTW" target="_blank" class="nav-item pt-1 mx-1 text-center">
-                    <img width="32px" src="./assets/GitHub-Mark-64px.png">
-                </a>
-
-                <a href="https://twitter.com/mizuyoru_TW" target="_blank" class="nav-item pt-1 mx-1 text-center">
-                    <img width="32px" src="./assets/Twitter_Social_Icon_Circle_Color.svg">
-                </a>
             </div>
             <span class="navbar-text mr-2" id="NowTime">
                 00:00:00
