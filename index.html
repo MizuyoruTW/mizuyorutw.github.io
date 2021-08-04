@@ -17,9 +17,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light py-0">
         <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="navbar-collapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -28,7 +28,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">New Window</a></li>
-                            <li><a class="dropdown-item" href="#">Save as</a></li>
+                            <li><a class="dropdown-item" href="#" id="download_file">Save as</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -56,30 +56,30 @@
     </nav>
 
     <div id="sidebar">
-        <div class="d-flex flex-column flex-shrink-0 p-0 text-white my-bg-dark" style="width: 280px;">
-            <ul class="nav nav-pills flex-column mb-auto">
+        <div class="d-flex flex-column flex-shrink-0 p-0 text-white my-bg-dark" style="width: 20vw;">
+            <ul class="nav nav-pills flex-column mb-auto" id="file_list">
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-white py-1 active" aria-current="page">
+                    <a href="#" class="nav-link text-white py-1" onclick="load_file(this)">
                         introduce.py
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="#" class="nav-link text-white py-1" onclick="load_file(this)">
                         introduce.py
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="#" class="nav-link text-white py-1" onclick="load_file(this)">
                         introduce.js
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
-                        introduce.md
+                    <a href="#" class="nav-link text-white py-1" onclick="load_file(this)">
+                        README.md
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="#" class="nav-link text-white py-1" onclick="load_file(this)">
                         introduce
                     </a>
                 </li>
@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    <div class="code_area p-5">
+    <div class="code_area p-3">
     </div>
 </body>
 

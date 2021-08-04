@@ -1,17 +1,36 @@
-$(document).ready(function () {
+var current_file = "";
+var load_file = (elem) => {
+	filename = $.trim($(elem).text());
+	$(".code_area").empty();
+	$("#file_list li a").each(function () {
+		$(this).removeClass("active");
+	});
+	$(elem).addClass("active");
+	$.ajax({
+		url: filename,
+		method: "GET",
+		dataType: "text",
+		success: function (res) {
+			current_file = filename;
+			lines = res.split("\n");
+			lines.forEach((element, index) => {
+				var num = (index + 1).toString();
+				if (num < 10) {
+					num = "0" + num;
+				}
+				$(".code_area").append(`<p>${num}&emsp;${element}</p>`);
+			});
+		},
+		error: function (err) {
+			console.log(err);
+			alert("Load file failed.");
+		},
+	});
+};
 
-    // Check for click events on the navbar burger icon
-    $(".navbar-burger").click(function () {
-
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-        $(".navbar-burger").toggleClass("is-active");
-        $(".navbar-menu").toggleClass("is-active");
-
-    });
+$(document).ready(() => {
+	$("#download_file").click((e) => {
+		e.preventDefault();
+		window.location.href = current_file;
+	});
 });
-
-var current_line_counts = 0;
-var add_line = (str) => {
-    $(".code_area").append(`${current_line_counts + 1}&emsp;${str}`);
-    current_line_counts++;
-}
