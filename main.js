@@ -9,3 +9,9 @@ $(document).ready(function () {
 
     });
 });
+
+var current_line_counts = 0;
+var add_line = (str) => {
+    $(".code_area").append(`${current_line_counts + 1}&emsp;${str}`);
+    current_line_counts++;
+}

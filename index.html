@@ -5,22 +5,90 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Service unavaliable</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="./main.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./main.js"></script>
 </head>
 
 <body>
-    <section class="hero  is-info is-fullheight">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <p class="title">
-                    2021/03/24
-                </p>
-                <p class="subtitle">
-                    This site is currently under maintenance.
-                </p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            File
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">New Window</a></li>
+                            <li><a class="dropdown-item" href="#">Save as</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Language
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">English</a></li>
+                            <li><a class="dropdown-item" href="#">繁體中文</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Help
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">About</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
-    </section>
+    </nav>
+
+    <div id="sidebar">
+        <div class="d-flex flex-column flex-shrink-0 p-0 text-white my-bg-dark" style="width: 280px;">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white py-1 active" aria-current="page">
+                        introduce.py
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        introduce.py
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        introduce.js
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        introduce.md
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        introduce
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="code_area p-5">
+    </div>
 </body>
 
 </html>
