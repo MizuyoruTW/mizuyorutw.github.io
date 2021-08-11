@@ -42,3 +42,10 @@ nav {
 .code_skyblue {
 	color: skyblue;
 }
+
+.dropdown-item-checked::after {
+	position: absolute;
+	right: 0.4rem;
+	content: "✓";
+	font-weight: 600;
+}
