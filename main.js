@@ -20,9 +20,12 @@ var highlight = (res) => {
 	res = res.replace(/(\".+?\")/g, "<span class='code_sand'>$1</span>");
 	//link
 	res = res.replace(
-		/\"(https\:\/\/.+?)\"/g,
-		"&quot;<a href='$1' target='_blank'>$1</a>&quot;"
+		/(https\:\/\/[0-9a-zA-Z\.\/\?\=]+)/g,
+		"<a href='$1' target='_blank'>$1</a>"
 	);
+	//comment
+	res = res.replace(/(\/\*.+?\*\/)/g, "<span class='code_green'>$1</span>");
+
 	return res;
 };
 

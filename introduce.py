@@ -8,4 +8,5 @@ new_user.hasGirlFriend = False
 new_user.habbies = ["Watching YouTube",
                     "Browsing forums",
                     "Programming",
-                    "Staying alive"]
+                    "Staying alive",
+                    "Playing games"]
