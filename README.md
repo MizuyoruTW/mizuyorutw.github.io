@@ -1,3 +1,8 @@
 # Welcome
-這個網站是用Jquery和Bootstrap做成，詳細請進入網頁選單的系統查看
-mobile版則是用Mashup的模板做成
+
+This website is using Jquery 3.6.0 and Bootstrap 5.0.2.
+For the best user experience, please use a desktop to view this website.
+
+# License
+
+This website is under MIT License, which means anyone can share, copy, modify, publish, even sell this project, BUT you MUST include the copyright notice and permission notice mentioned in file LICENSE.
