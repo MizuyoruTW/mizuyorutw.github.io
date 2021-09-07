@@ -25,7 +25,11 @@ var highlight = (res) => {
 	);
 	//comment
 	res = res.replace(/(\/\*.+?\*\/)/g, "<span class='code_green'>$1</span>");
-
+	//license file
+	res = res.replace(
+		"LICENSE",
+		`<a href='#' onclick="$('#license_ahref')[0].click()">LICENSE</a>`
+	);
 	return res;
 };
 
