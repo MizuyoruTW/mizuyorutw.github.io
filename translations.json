@@ -8,5 +8,8 @@
 	"Playing games": "玩遊戲",
 	"My ": "我的",
 	"Favorate Music List": "最愛歌單",
-	"you can run the above scripts on": "你可以執行以上程式碼於"
+	"you can run the above scripts on": "你可以執行以上程式碼於",
+	"This website is made of Jquery 3.6.0 and Bootstrap 5.0.2.": "這個網站使用 Jquery 3.6.0 和 Bootstrap 5.0.2。",
+	"For the best user experience, please use desktop to view this website.": "請使用電腦觀看以獲得最佳操作體驗。",
+	"This website is under MIT License, that means anyone can share, copy, modify, publish, even sell this project, BUT you MUST include the copyright notice and permission notice mentioned in file LICENSE.": "這個網站使用MIT授權條款授權，這意味著你可以分享、複製、修改、發佈甚至販售這個專案，但你必須包含LICENSE文件的著作權標示與許可聲明。"
 }
