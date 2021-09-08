@@ -8,7 +8,7 @@ int main(){
 
     Link twitter;
     twitter.name = "My Twitter";
-    twitter.src = "https://twitter.com/mizuyoruTW"
+    twitter.src = "https://twitter.com/mizuyoruTW";
 
     Link archlinux;
     archlinux.name = "Arch Linux";
