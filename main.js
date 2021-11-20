@@ -79,6 +79,9 @@ $(document).ready(() => {
 		},
 	});
 	url_param = getURLParameter("url");
+	if (url_param == "cat_do_backflip") {
+		window.location.href = "https://youtu.be/dQw4w9WgXcQ";
+	}
 	if (url_param != "") {
 		content = "Redirecting to " + url_param;
 		display_content();
