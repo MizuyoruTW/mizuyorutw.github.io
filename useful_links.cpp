@@ -17,4 +17,8 @@ int main(){
     Link music;
     music.name = "My Favorate Music List";
     music.src = "https://youtube.com/playlist?list=PLrLK596h5w3mbepzOJCiNPbW8blnHttep";
+
+    Link cat_do_backflip_video;
+    cat_do_backflip_video.name = "See how the cat does a backflip!!!";
+    cat_do_backflip_video.src = "https://mizuyorutw.github.io/?url=cat_do_backflip";
 }
