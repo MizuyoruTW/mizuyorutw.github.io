@@ -87,7 +87,7 @@ $(document).ready(() => {
 		display_content();
 		setTimeout(function () {
 			window.location.href = url_param;
-		}, 3000);
+		}, 1000);
 	}
 });
 
