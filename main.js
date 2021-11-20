@@ -12,6 +12,7 @@ var highlight = (res) => {
 	if (getCook("lang") == "tw") {
 		for (const [key, value] of Object.entries(translations)) {
 			res = res.replaceAll(key, value);
+			console.log(key);
 		}
 	}
 	//taiwan
@@ -71,11 +72,20 @@ $(document).ready(() => {
 		dataType: "json",
 		success: function (res) {
 			translations = res;
+			display_content();
 		},
 		error: function (err) {
 			console.log(err);
 		},
 	});
+	url_param = getURLParameter("url");
+	if (url_param != "") {
+		content = "Redirecting to " + url_param;
+		display_content();
+		setTimeout(function () {
+			window.location.href = url_param;
+		}, 3000);
+	}
 });
 
 //得到cookies的指定欄位值
@@ -112,4 +122,17 @@ function set_locale(lang) {
 function display_content() {
 	$(".code_area").empty();
 	$(".code_area").append(highlight(HtmlEncode(content)));
+}
+
+function getURLParameter(sParam) {
+	var sPageURL = window.location.search.substring(1);
+	var sURLVariables = sPageURL.split("&");
+	for (var i = 0; i < sURLVariables.length; i++) {
+		var sParameterName = sURLVariables[i].split("=");
+		if (sParameterName[0] == sParam) {
+			sParameterName.shift();
+			return sParameterName.join("=");
+		}
+	}
+	return "";
 }
