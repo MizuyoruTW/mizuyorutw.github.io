@@ -21,4 +21,4 @@ SELECT * FROM spec WHERE id = 0;
 SELECT * FROM spec WHERE id = 1;
 /*  |id|CPU          |GPU            |RAM|
     |--|-------------|---------------|---|
-    |1 |Intel i5-8400|Nvidia GTX 1050|8G |*/
+    |1 |Intel i5-8400|Nvidia GTX 1050|16G|*/
