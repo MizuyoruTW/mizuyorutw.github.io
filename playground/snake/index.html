@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <style>
+        @import url("https://webgl2fundamentals.org/webgl/resources/webgl-tutorials.css");
+
+        body {
+            margin: 0;
+        }
+
+        #canvas {
+            width: 70vw;
+            height: 70vh;
+            display: block;
+            margin: 15vh 15vw;
+        }
+
+        #score {
+            margin: 15vh 1vw;
+            width: 13vw;
+            height: 30vh;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: 9999;
+        }
+    </style>
+    <title>The Snake and it's adventure</title>
+</head>
+
+<body>
+    <canvas id="canvas" tabindex="0"></canvas>
+    <canvas id="score"></canvas>
+</body>
+<script src="https://webgl2fundamentals.org/webgl/resources/webgl-utils.js"></script>
+<script src="https://webgl2fundamentals.org/webgl/resources/webgl-lessons-ui.js"></script>
+<script src="main.js"></script>
+
+</html>

@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>Adventure in the ruins of big heads</title>
+    <style>
+        @import url("https://webgl2fundamentals.org/webgl/resources/webgl-tutorials.css");
+
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+
+        #score {
+            margin: 0;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: 9999;
+            background-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <canvas id="score"></canvas>
+    <!--
+for most samples webgl-utils only provides shader compiling/linking and
+canvas resizing because why clutter the examples with code that's the same in every sample.
+See https://webgl2fundamentals.org/webgl/lessons/webgl-boilerplate.html
+and https://webgl2fundamentals.org/webgl/lessons/webgl-resizing-the-canvas.html
+for webgl-utils, m3, m4, and webgl-lessons-ui.
+-->
+    <script src="https://webgl2fundamentals.org/webgl/resources/webgl-utils.js"></script>
+    <script src="https://webgl2fundamentals.org/webgl/resources/webgl-lessons-ui.js"></script>
+    <script src="https://webgl2fundamentals.org/webgl/resources/headdata.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
