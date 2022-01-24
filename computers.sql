@@ -8,10 +8,10 @@ SELECT type, id FROM computers;
     |PC    |1 |*/
 
 SELECT OS FROM computers;
-/*  |OS            |id|
-    |--------------|--|
-    |Windows, Linux|0 |
-    |Windows       |1 |*/
+/*  |OS     |id|
+    |-------|--|
+    |Linux  |0 |
+    |Windows|1 |*/
 
 SELECT * FROM spec WHERE id = 0;
 /*  |id|CPU            |GPU                               |RAM|
