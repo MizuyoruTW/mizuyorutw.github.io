@@ -1,0 +1,21 @@
+.navbar-text {
+	color: white !important;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+}
+
+#input_text {
+	width: 100%;
+}
+
+#host {
+	display: none;
+}

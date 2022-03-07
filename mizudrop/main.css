@@ -1,0 +1,65 @@
+nav {
+	height: 5vh;
+}
+
+.my-bg-dark {
+	background-color: #303030;
+}
+
+.active {
+	background-color: #505050 !important;
+}
+
+#sidebar {
+	display: flex;
+	flex-wrap: nowrap;
+	height: 95vh;
+}
+
+.nav-pills li a {
+	-webkit-border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	border-radius: 0 !important;
+}
+
+.code_area {
+	position: absolute;
+	top: 5vh;
+	left: 20vw;
+	background-color: #252525;
+	width: 80vw;
+	height: 95vh;
+	color: white;
+	font-size: 1.5em;
+	overflow: auto;
+}
+
+.code_sand {
+	color: sandybrown;
+}
+
+.code_skyblue {
+	color: skyblue;
+}
+
+.code_green {
+	color: #6a9955;
+}
+
+.dropdown-item-checked::after {
+	position: absolute;
+	right: 0.4rem;
+	content: "✓";
+	font-weight: 600;
+}
+
+#imga {
+	width: 25%;
+	margin: 0 auto;
+	padding: 10px;
+}
+#imga #img,
+#imga canvas,
+#imga input {
+	width: 100%;
+}
