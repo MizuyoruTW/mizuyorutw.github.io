@@ -2,20 +2,57 @@ function uploadFile() {
 	$("#fs").click();
 }
 
+function filesize_to_human(size) {
+	var unit = [" B", " KB", " MB", " GB"];
+	var c = 0;
+	while (size > 1023) {
+		size /= 1024;
+		c++;
+	}
+	size = Math.round(size * 100) / 100;
+	return String(size) + unit[c];
+}
+
 $("#fs").change(function () {
 	if ($("#fs").prop("files").length > 0) {
-		var peer = new Peer();
+		var file = $("#fs").prop("files")[0];
+		var peer = new Peer({
+			config: {
+				iceServers: [
+					{
+						urls: "stun:openrelay.metered.ca:80",
+					},
+					{
+						urls: "turn:openrelay.metered.ca:80",
+						username: "openrelayproject",
+						credential: "openrelayproject",
+					},
+					{
+						urls: "turn:openrelay.metered.ca:443",
+						username: "openrelayproject",
+						credential: "openrelayproject",
+					},
+					{
+						urls: "turn:openrelay.metered.ca:443?transport=tcp",
+						username: "openrelayproject",
+						credential: "openrelayproject",
+					},
+				],
+			},
+		});
 		peer.on("open", function (id) {
 			$("#img").remove();
 			$("#imga").prop("onclick", null).off("click");
 			$("#imga").css("background-color", "white");
 			$("<a>", {
+				id: "peerlink",
 				href: "index.html?peerid=" + peer.id,
 				target: "_blank",
 			})
 				.html(peer.id)
-				.appendTo("#imga");
-			$("#imga").qrcode($("a").prop("href"));
+				.appendTo("#inform");
+			$("#imga").qrcode($("#peerlink").prop("href"));
+			$("<div>").html(filesize_to_human(file.size)).appendTo("#inform");
 		});
 		peer.on("connection", function (conn) {
 			conn.on("open", function () {
@@ -55,7 +92,30 @@ peerid = getUrlParameter("peerid");
 if (peerid) {
 	$("#imga").prop("onclick", null).off("click");
 	$("#img").prop("src", "download.svg");
-	var peer = new Peer();
+	var peer = new Peer({
+		config: {
+			iceServers: [
+				{
+					urls: "stun:openrelay.metered.ca:80",
+				},
+				{
+					urls: "turn:openrelay.metered.ca:80",
+					username: "openrelayproject",
+					credential: "openrelayproject",
+				},
+				{
+					urls: "turn:openrelay.metered.ca:443",
+					username: "openrelayproject",
+					credential: "openrelayproject",
+				},
+				{
+					urls: "turn:openrelay.metered.ca:443?transport=tcp",
+					username: "openrelayproject",
+					credential: "openrelayproject",
+				},
+			],
+		},
+	});
 	peer.on("open", function (id) {
 		var conn = peer.connect(peerid);
 		conn.on("open", function () {
@@ -73,7 +133,6 @@ function received(conn, data) {
 	} else if (data.type == "file") {
 		receiveFile(data.data);
 	} else if (data.type == "check") {
-		var co = null;
 		var input_code = $("<input>", {
 			type: "text",
 			id: "input_code",
@@ -114,7 +173,7 @@ function receiveFile(data) {
 		//style: "display:none;",
 	})
 		.html(data.filename)
-		.appendTo("#imga");
+		.appendTo("#inform");
 	//$("#" + id).trigger("click");
 }
 

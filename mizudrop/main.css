@@ -1,5 +1,11 @@
+body {
+	display: flex;
+	flex-flow: column;
+	height: 100vh;
+}
 nav {
-	height: 5vh;
+	z-index: 9999;
+	flex: 0 1 auto;
 }
 
 .my-bg-dark {
@@ -10,12 +16,6 @@ nav {
 	background-color: #505050 !important;
 }
 
-#sidebar {
-	display: flex;
-	flex-wrap: nowrap;
-	height: 95vh;
-}
-
 .nav-pills li a {
 	-webkit-border-radius: 0 !important;
 	-moz-border-radius: 0 !important;
@@ -23,15 +23,11 @@ nav {
 }
 
 .code_area {
-	position: absolute;
-	top: 5vh;
-	left: 20vw;
 	background-color: #252525;
-	width: 80vw;
-	height: 95vh;
 	color: white;
 	font-size: 1.5em;
 	overflow: auto;
+	flex: 1 1 auto;
 }
 
 .code_sand {
@@ -53,13 +49,11 @@ nav {
 	font-weight: 600;
 }
 
-#imga {
-	width: 25%;
-	margin: 0 auto;
-	padding: 10px;
-}
-#imga #img,
-#imga canvas,
-#imga input {
+#imga * {
 	width: 100%;
+	text-align: center;
+}
+
+#inform {
+	text-align: center;
 }
