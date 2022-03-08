@@ -1,3 +1,8 @@
+var size = 0;
+var st = 0;
+var et = 0;
+var speed = 0;
+
 function uploadFile() {
 	$("#fs").click();
 }
@@ -41,18 +46,20 @@ $("#fs").change(function () {
 			},
 		});
 		peer.on("open", function (id) {
-			$("#img").remove();
+			$("#img").hide();
 			$("#imga").prop("onclick", null).off("click");
 			$("#imga").css("background-color", "white");
 			$("<a>", {
 				id: "peerlink",
 				href: "index.html?peerid=" + peer.id,
 				target: "_blank",
-			})
-				.html(peer.id)
-				.appendTo("#inform");
-			$("#imga").qrcode($("#peerlink").prop("href"));
-			$("<div>").html(filesize_to_human(file.size)).appendTo("#inform");
+			}).appendTo("#imga");
+			$("#peerlink").qrcode($("#peerlink").prop("href"));
+			size = file.size;
+			$("#step1").html(
+				$("#step1").html() + " (" + filesize_to_human(size) + ")"
+			);
+			newstep(2, "2. 等待對方連接");
 		});
 		peer.on("connection", function (conn) {
 			conn.on("open", function () {
@@ -60,8 +67,8 @@ $("#fs").change(function () {
 					6,
 					"0"
 				);
-				conn.send({ type: "check" });
-				alert("請在對面輸入\n" + code);
+				conn.send({ type: "check", data: file.size });
+				newstep(3, "3. 請在對面輸入: " + code);
 				conn.on("data", function (data) {
 					received(conn, data);
 				});
@@ -69,6 +76,18 @@ $("#fs").change(function () {
 		});
 	}
 });
+
+function newstep(n, text) {
+	$("#step" + (n - 1)).html(
+		"<h5><s>" + $("#step" + (n - 1)).html() + "</s></h5>"
+	);
+	$("#step" + (n - 1)).addClass("text-muted");
+	$("<div>", {
+		id: "step" + n,
+	})
+		.html(text)
+		.appendTo("#inform");
+}
 
 function getUrlParameter(sParam) {
 	var sPageURL = window.location.search.substring(1),
@@ -116,6 +135,7 @@ if (peerid) {
 			],
 		},
 	});
+	newstep(1, "1. 等待建立連接");
 	peer.on("open", function (id) {
 		var conn = peer.connect(peerid);
 		conn.on("open", function () {
@@ -125,14 +145,34 @@ if (peerid) {
 			});
 		});
 	});
+} else {
+	$("#imga").click(function () {
+		uploadFile();
+	});
+	$("#img").prop("src", "upload.svg");
+	newstep(1, "1. 點擊上方圖示選取檔案");
 }
 
 function received(conn, data) {
-	if (data.type == "text") {
-		new_line(data.data, "start");
-	} else if (data.type == "file") {
+	if (data.type == "file") {
 		receiveFile(data.data);
+		et = Date.now();
+		conn.send({ type: "complete", time: et });
+		$("#img").prop("src", "done.svg");
+		newstep(
+			4,
+			"傳輸完成，感謝你的使用<p>速度: " +
+				filesize_to_human((size * 1000) / (et - st)) +
+				"/s"
+		);
 	} else if (data.type == "check") {
+		size = data.data;
+		newstep(
+			2,
+			"2. 連接成功，傳輸檔案大小 " +
+				filesize_to_human(size) +
+				"<p>請輸入金鑰接收檔案"
+		);
 		var input_code = $("<input>", {
 			type: "text",
 			id: "input_code",
@@ -144,21 +184,35 @@ function received(conn, data) {
 				conn.send({ type: "code", data: input_code.val() });
 			}
 		});
-		input_code.appendTo("#imga");
+		input_code.appendTo("#inform");
 	} else if (data.type == "result") {
 		if (data.data) {
-			alert("驗證成功，等待傳送");
+			newstep(3, "3. 驗證成功，等待傳送");
 			$("#input_code").remove();
+			st = data.time;
 		} else {
 			alert("驗證失敗");
 		}
 	} else if (data.type == "code") {
 		if (code == data.data) {
-			conn.send({ type: "result", data: true });
+			st = Date.now();
+			conn.send({ type: "result", data: true, time: st });
 			sendFile(conn);
 		} else {
 			conn.send({ type: "result", data: false });
 		}
+	} else if (data.type == "complete") {
+		et = data.time;
+		newstep(
+			4,
+			"傳輸完成，感謝你的使用<p>速度: " +
+				filesize_to_human((size * 1000) / (et - st)) +
+				"/s"
+		);
+		$("#imga").css("background-color", "");
+		$("#peerlink").remove();
+		$("#img").prop("src", "done.svg");
+		$("#img").show();
 	}
 }
 
@@ -174,6 +228,7 @@ function receiveFile(data) {
 	})
 		.html(data.filename)
 		.appendTo("#inform");
+
 	//$("#" + id).trigger("click");
 }
 
