@@ -155,12 +155,13 @@ if (peerid) {
 
 function received(conn, data) {
 	if (data.type == "file") {
+		newstep(4, "傳輸中...");
 		receiveFile(data.data);
 		et = Date.now();
 		conn.send({ type: "complete", time: et });
 		$("#img").prop("src", "done.svg");
 		newstep(
-			4,
+			5,
 			"傳輸完成，感謝你的使用<p>速度: " +
 				filesize_to_human((size * 1000) / (et - st)) +
 				"/s"
@@ -195,6 +196,7 @@ function received(conn, data) {
 		}
 	} else if (data.type == "code") {
 		if (code == data.data) {
+			newstep(4, "傳輸中...");
 			st = Date.now();
 			conn.send({ type: "result", data: true, time: st });
 			sendFile(conn);
@@ -204,7 +206,7 @@ function received(conn, data) {
 	} else if (data.type == "complete") {
 		et = data.time;
 		newstep(
-			4,
+			5,
 			"傳輸完成，感謝你的使用<p>速度: " +
 				filesize_to_human((size * 1000) / (et - st)) +
 				"/s"
