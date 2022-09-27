@@ -1,131 +1,12 @@
-var current_file = "";
-var translations = {};
-var content = "";
-var HtmlEncode = (s) => {
-	var el = document.createElement("div");
-	el.innerText = el.textContent = s;
-	s = el.innerHTML;
-	return s;
-};
-
-var highlight = (res) => {
-	if (getCook("lang") == "tw") {
-		for (const [key, value] of Object.entries(translations)) {
-			res = res.replaceAll(key, value);
-			console.log(key);
-		}
-	}
-	//taiwan
-	res = res.replace("Taiwan", "Taiwan&#127481;&#127484;");
-	//quote
-	res = res.replace(/(\".+?\")/g, "<span class='code_sand'>$1</span>");
-	//link
-	res = res.replace(
-		/(https\:\/\/[0-9a-zA-Z\.\/\?\=\_]+)/g,
-		"<a href='$1' target='_blank'>$1</a>"
-	);
-	//comment
-	res = res.replace(/(\/\*.+?\*\/)/g, "<span class='code_green'>$1</span>");
-	//license file
-	res = res.replace(
-		"LICENSE",
-		`<a href='#' onclick="$('#license_ahref')[0].click()">LICENSE</a>`
-	);
-	return res;
-};
-
-var load_file = (elem) => {
-	filename = $.trim($(elem).text());
-	$("#file_list li a").each(function () {
-		$(this).removeClass("active");
-	});
-	$(elem).addClass("active");
-	$.ajax({
-		url: filename,
-		method: "GET",
-		dataType: "text",
-		success: function (res) {
-			current_file = filename;
-			content = res;
-			display_content();
-		},
-		error: function (err) {
-			console.log(err);
-			alert("Load file failed.");
-		},
-	});
-};
-
 $(document).ready(() => {
-	if (getCook("lang") == "tw") {
-		set_locale("tw");
-	} else {
-		set_locale("en");
-	}
-	$("#download_file").click((e) => {
-		e.preventDefault();
-		window.location.href = current_file;
-	});
-	$.ajax({
-		url: "translations.json",
-		method: "GET",
-		dataType: "json",
-		success: function (res) {
-			translations = res;
-			display_content();
-		},
-		error: function (err) {
-			console.log(err);
-		},
-	});
 	url_param = getURLParameter("url");
 	if (url_param == "cat_do_backflip") {
-		window.location.href = "https://youtu.be/dQw4w9WgXcQ";
+		url_param = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+	} else if (url_param == "") {
+		url_param = "https://github.com/MizuyoruTW";
 	}
-	if (url_param != "") {
-		content = "Redirecting to " + url_param;
-		display_content();
-		setTimeout(function () {
-			window.location.href = url_param;
-		}, 1000);
-	}
+	updateProgressBar(0, url_param);
 });
-
-//得到cookies的指定欄位值
-function getCook(cookiename) {
-	// Get name followed by anything except a semicolon
-	var cookiestring = RegExp(cookiename + "=[^;]+").exec(document.cookie);
-	// Return everything after the equal sign, or an empty string if the cookie name not found
-	return decodeURIComponent(
-		!!cookiestring ? cookiestring.toString().replace(/^[^=]+./, "") : ""
-	);
-}
-
-function setCookie(name, value, days) {
-	var expires = "";
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-		expires = "; expires=" + date.toUTCString();
-	}
-	document.cookie = name + "=" + (value || "") + expires + "; path=/";
-}
-
-function set_locale(lang) {
-	setCookie("lang", lang, "30");
-	$("a[id^='lang-'").each(function (element) {
-		$(this).removeClass("dropdown-item-checked");
-	});
-	$("#lang-" + lang).addClass("dropdown-item-checked");
-	if (current_file != "") {
-		display_content();
-	}
-}
-
-function display_content() {
-	$(".code_area").empty();
-	$(".code_area").append(highlight(HtmlEncode(content)));
-}
 
 function getURLParameter(sParam) {
 	var sPageURL = window.location.search.substring(1);
@@ -138,4 +19,47 @@ function getURLParameter(sParam) {
 		}
 	}
 	return "";
+}
+
+statusText = [
+	"Defending DDoS",
+	"Checking Virus",
+	"Connecting to Server",
+	"Establishing SSL handshake",
+	"Making Coffee☕",
+	"Baking Cookies🍪",
+	"Caching Website",
+	"Downloading images",
+	"Washing hands🧼",
+	"Wearing mask😷",
+	"Why it's so slow?",
+	"Using Firefox to check online status",
+	"Windows BSOD, changing to Linux",
+	"It seems be OK",
+	"Out of memory, retrying...",
+];
+function updateProgressBar(n = 0, url = "#") {
+	if (n == 6) {
+		document.cookie = "BakeTime=" + Date.now();
+	} else if (n >= statusText.length) {
+		n = statusText.length - 1;
+	}
+	oldVal = parseInt($(".progress-bar").attr("aria-valuenow"));
+	newVal = oldVal + Math.random() * 20;
+	if (newVal >= 100) {
+		$(".status").text("Status: Redirecting");
+		$(".progress-bar").css("width", "100%").attr("aria-valuenow", 100);
+		setTimeout(function () {
+			window.location.replace(url);
+		}, 500);
+	} else {
+		$(".progress-bar")
+			.css("width", newVal + "%")
+			.attr("aria-valuenow", newVal);
+
+		$(".status").text("Status: " + statusText[n]);
+		setTimeout(function () {
+			updateProgressBar(n + 1, url);
+		}, Math.random() * 1000);
+	}
 }
